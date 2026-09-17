@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=KherveFitting
+Comment=Open-source XPS peak fitting
+Exec=/opt/conda/bin/python /home/jovyan/KherveFitting/KherveFitting.py
+Path=/home/jovyan/KherveFitting
+Icon=KherveFitting
+Terminal=false
+StartupNotify=false
+Categories=Science;

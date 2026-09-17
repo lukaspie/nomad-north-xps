@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CasaXPS
+Comment=XPS peak fitting (demo mode unless a license has been activated)
+Exec=env WINEDEBUG=-all wine CasaXPS.exe
+Path=/home/jovyan/CasaXPS
+Icon=CasaXPS
+Terminal=false
+StartupNotify=false
+Categories=Science;
