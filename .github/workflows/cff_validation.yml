@@ -6,13 +6,13 @@ on:
       - main
     paths:
       - "CITATION.cff"
-      - ".github/workflows/cff-validation.yml"
+      - ".github/workflows/cff_validation.yml"
   pull_request:
     branches:
       - main
     paths:
       - "CITATION.cff"
-      - ".github/workflows/cff-validation.yml"
+      - ".github/workflows/cff_validation.yml"
 
 env:
   PYTHON_VERSION: 3.12

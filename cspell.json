@@ -10,8 +10,8 @@
         "__pycache__",
         "dist",
         "build",
-        "src/nomad_north_xps/north_tools/casa/casa-app/**",
-        "src/nomad_north_xps/north_tools/casa/casa-wine/**"
+        "local/casa-app/**",
+        "local/casa-wine/**"
     ],
   "dictionaryDefinitions": [
     {

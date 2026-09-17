@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-title: 'nomad-north-xps: A NOMAD plugin for ...'
+title: 'nomad-north-xps: A NOMAD NORTH plugin for XPS peak-fitting GUI tools'
 version: 0.1.0
 message:
   If you use this software, please cite it using the
@@ -8,15 +8,35 @@ type: software
 authors:
   - given-names: Lukas
     family-names: Pielsticker
-    orcid: 'https://orcid.org/0000-0000-0000-0000'
-doi: 10.5281/zenodo.0000000
-repository-code: https://github.com/FAIRmat-NFDI/nomad-north-xps
-url: https://zenodo.org/records/0000000
+    orcid: 'https://orcid.org/0000-0001-9361-8333'
+repository-code: 'https://github.com/FAIRmat-NFDI/nomad-north-xps'
 keywords:
-  - keyword1
+  - NOMAD
+  - NORTH
+  - X-ray Photoelectron Spectroscopy
+  - XPS
+  - KherveFitting
+  - CasaXPS
+  - Wine
 abstract:
-  This is a template for a CITATION.cff file. Please edit the fields accordingly.
-license: MIT
+  nomad-north-xps is a NOMAD NORTH plugin bundling XPS peak-fitting GUI tools on top of the
+  pynxtools-xps conversion tooling (https://github.com/FAIRmat-NFDI/pynxtools-xps). By default it
+  runs KherveFitting (https://github.com/KherveFitting/KherveFitting), an open-source XPS peak
+  fitting tool.
+
+  CasaXPS (http://www.casaxps.com/), a commercial XPS analysis tool, can be added via Wine, but
+  only as a local build - it is never CI-built or published, since its licensing terms don't
+  contain redistribution rights. The installer and licensed Wine prefix are never committed to
+  this repository, but license holders can built a local version containing CasaXPS themselves.
+
+  nomad-north-xps is developed as a plugin for NOMAD, an open-source data management platform
+  for materials science (https://nomad-lab.eu/nomad-lab/).
+
+  The work is funded by the Deutsche Forschungsgemeinschaft (DFG, German Research Foundation) -
+  460197019 (FAIRmat) (https://gepris.dfg.de/project/460197019).
+license: Apache-2.0
 funding:
-  - name: Funding Agency
-    award: 123456
+  - name: Deutsche Forschungsgemeinschaft
+    award-number: 460197019
+    title: FAIRmat - FAIR Data Infrastructure for Condensed-Matter Physics and the Chemical Physics of Solids
+    award-uri: https://gepris.dfg.de/project/460197019

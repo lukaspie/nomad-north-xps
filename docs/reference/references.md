@@ -12,7 +12,7 @@ One entry point, `xps`, defined in [`src/nomad_north_xps/north_tools/__init__.py
 | `mount_path` | `/home/jovyan` | Where the triggering upload is mounted |
 | `path_prefix` | `lab/tree` | With `with_path`, builds a link straight to the launched file |
 | `with_path` | `true` | The triggering file is included in that URL |
-| `image_pull_policy` | `Always` | Re-pulled on every launch |
+| `image_pull_policy` | `Always` | Only honored by k8s-based NORTH deployments. `nomad-distro-dev`'s local Docker setup uses DockerSpawner directly, which NOMAD never wires this field into — DockerSpawner falls back to its own default (pull only if the tag isn't already present locally), which is why a bare local tag works without a failed registry pull |
 | `privileged` | `false` | Neither tool needs elevated container privileges |
 | `display_name` | `xps` | Name shown in NORTH's tool list |
 

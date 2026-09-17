@@ -1,10 +1,16 @@
+# SPDX-FileCopyrightText: The nomad-north-xps Authors
+#
+# This file is part of nomad-north-xps.
+#
+# SPDX-License-Identifier: Apache-2.0
+
 from nomad.config.models.north import NORTHTool
 from nomad.config.models.plugins import NORTHToolEntryPoint
 
-# One entry point, `xps`, regardless of which build directory produced its image. 
+# One entry point, `xps`, regardless of which build directory produced its image.
 # `kherve` (open-source, no license question) is CI-published and what `image` points
 # at by default.
-# `casa` (CasaXPS via Wine) is never CI-built — even its free demo has no confirmed 
+# `casa` (CasaXPS via Wine) is never CI-built — even its free demo has no confirmed
 # redistribution rights — so it stays a local-only build layered `FROM` the kherve image;
 # see north_tools/casa/README.md. Someone who builds it repoints this same entry point's
 # `image` via  `nomad.yaml` instead of a second entry point ever appearing in NORTH's launcher.

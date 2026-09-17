@@ -4,12 +4,7 @@ NOMAD NORTH plugin bundling XPS peak-fitting GUI tools.
 
 ## About
 
-This is a NOMAD plugin for GUI tools used for peak-fitting in X-ray Photoelectron Spectroscopy (XPS). It registers one NORTH tool entry point, `xps` that bundles
-
--- [KherveFitting](https://github.com/KherveFitting/KherveFitting), an open-source XPS peak fitting software, and
--- [CasaXPS](http://www.casaxps.com/), a license-gated XPS analysis software.
-
-By default, a free demo of CasaXPS is installed (via [Wine](https://www.winehq.org/)). Whoever holds a real CasaXPS license can activate it and rebuild locally, then repoint the same entry point at their own image -- see the [documentation](https://fairmat-nfdi.github.io/nomad-north-xps/) for how.
+This is a NOMAD plugin for GUI tools used for peak-fitting in X-ray Photoelectron Spectroscopy (XPS). It registers one NORTH tool entry point, `xps`. By default it runs [KherveFitting](https://github.com/KherveFitting/KherveFitting), an open-source XPS peak fitting tool. [CasaXPS](http://www.casaxps.com/), a commercial XPS analysis tool, can be added via [Wine](https://www.winehq.org/), but only as a local build. It is never CI-built or published, since its licensing terms don't give redistribution rights. See the [documentation](https://fairmat-nfdi.github.io/nomad-north-xps/) for how.
 
 ## Docs
 

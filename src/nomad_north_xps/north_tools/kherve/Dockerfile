@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: The nomad-north-xps Authors
+#
+# This file is part of nomad-north-xps.
+#
+# SPDX-License-Identifier: Apache-2.0
+
 ARG UV_VERSION=0.9
 ARG BASE_IMAGE=ghcr.io/fairmat-nfdi/nomad-north-desktop-base
 ARG IMAGE_TAG=main
@@ -31,30 +37,11 @@ RUN apt-get -y -qq update \
         xdg-utils \
  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# ---- Chrome ----
-# google-chrome-stable's own desktop entry launches without --no-sandbox, which
-# crashes under this container's user namespace (no permission to set up
-# Chromium's setuid sandbox); --disable-dev-shm-usage avoids the small default
-# /dev/shm size causing renderer crashes; --password-store=basic stops Chrome
-# from prompting to create a system keyring, since none runs in this minimal
-# xfce container. Patch the entry the package installs rather than shipping
-# our own, so it stays in sync with the package (same fix as pynxtools-mpes).
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
- && dpkg -i google-chrome-stable_current_amd64.deb \
- && rm google-chrome-stable_current_amd64.deb \
- && sed -i 's/google-chrome-stable/google-chrome-stable --no-sandbox --disable-dev-shm-usage --password-store=basic/' \
-        /usr/share/applications/google-chrome.desktop
+# Chrome itself comes from nomad-north-desktop-base already (installed, sandboxed, and
+# desktop-integrated there).
 
 USER ${NB_UID}
 WORKDIR "${HOME}"
-
-# TurboVNC keyboard-layout workaround: without -noserverkeymap, the desktop
-# ignores the client's actual host keyboard layout (e.g. German umlauts
-# render as neighboring QWERTY keys). Same fix as pynxtools-mpes.
-# TODO: remove once nomad-north-desktop-base carries this fix upstream, since
-# every desktop-based NORTH tool inherits the same TurboVNC install.
-RUN mkdir -p "${HOME}/.vnc"
-COPY --chown=${NB_UID}:${NB_GID} src/nomad_north_xps/north_tools/kherve/config/turbovncserver.conf "${HOME}/.vnc/turbovncserver.conf"
 
 ENV UV_LINK_MODE=copy \
     UV_NO_CACHE=1 \
@@ -108,21 +95,8 @@ COPY --chown=${NB_UID}:${NB_GID} src/nomad_north_xps/north_tools/kherve/config/K
 COPY --chown=${NB_UID}:${NB_GID} src/nomad_north_xps/north_tools/kherve/config/KherveFitting.desktop "${HOME}/Desktop/KherveFitting.desktop"
 RUN chmod 755 "${HOME}/.local/share/applications/KherveFitting.desktop" "${HOME}/Desktop/KherveFitting.desktop"
 
-# Desktop icon for Chrome, reusing its own (already-patched, see above) desktop entry
-# instead of maintaining a second copy of it.
-RUN cp /usr/share/applications/google-chrome.desktop "${HOME}/Desktop/google-chrome.desktop" \
- && chown ${NB_UID}:${NB_GID} "${HOME}/Desktop/google-chrome.desktop" \
- && chmod 755 "${HOME}/Desktop/google-chrome.desktop"
-
-# Pre-trust every Desktop shortcut on session start (autostart script, not a build-time RUN —
-# `gio set ... metadata::` needs a running gvfs/dbus session, which only exists once the desktop
-# session itself starts), so double-clicking one doesn't trigger xfce's "untrusted launcher"
-# prompt. Same fix as pynxtools-mpes's VS Code icon. Kept generic (all Desktop/*.desktop files)
-# so a `casa/` build layered on top of this image is covered automatically.
-RUN mkdir -p "${HOME}/.config/autostart"
-COPY --chown=${NB_UID}:${NB_GID} src/nomad_north_xps/north_tools/kherve/config/autostart.desktop "${HOME}/.config/autostart/autostart.desktop"
-COPY --chown=${NB_UID}:${NB_GID} src/nomad_north_xps/north_tools/kherve/config/autostart_code "${HOME}/.config/autostart/autostart"
-RUN chmod 755 "${HOME}/.config/autostart/autostart.desktop" "${HOME}/.config/autostart/autostart"
+# Chrome's own Desktop icon and the untrusted-launcher trust-fix autostart both come from
+# nomad-north-desktop-base already.
 
 WORKDIR "${HOME}"
 

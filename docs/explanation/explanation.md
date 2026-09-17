@@ -5,13 +5,13 @@
 `nomad-north-xps` has one NORTH tool entry point, `xps`, and two build directories in `src/nomad_north_xps/north_tools/`:
 
 - `kherve` — KherveFitting. CI-built and published. This is what `xps`'s `image` points at by default.
-- `casa` — CasaXPS via [Wine](https://www.winehq.org/), layered `FROM` the `kherve` image. It is never buil in the CI, but you can build it yourself, locally.
+- `casa` — CasaXPS via [Wine](https://www.winehq.org/), layered `FROM` the `kherve` image. It is never built in the CI, but you can build it yourself, locally.
 
 Only one entry point exists regardless of which image is running — `casa` never appears as a separate tool in NORTH's launcher. Point `xps` at a `casa` build via `nomad.yaml` instead (see [How-to > Install this Plugin](../how_to/install_this_plugin.md)).
 
 ## Why standalone, not embedded in `pynxtools-xps`
 
-We do not embed the NORTH tool for XPS analysis together with the `pynxtools-xps` NeXus conversion package. `pynxtools-xps` is already substantially complexx (six vendor-specific parser families plus its own NOMAD app). Embedding would couple this image's release cycle to `pynxtools-xps`'s own parser and app releases for no benefit. Most `nomad-north-*` sibling are standalone — this package follows that convention. The `kherve` image installs `pynxtools[xps]` from PyPI like any other dependency.
+We do not embed the NORTH tool for XPS data analysis together with the `pynxtools-xps` NeXus conversion package. `pynxtools-xps` is already substantially complex (six vendor-specific parser families plus its own NOMAD app). Embedding would couple this image's release cycle to `pynxtools-xps`'s own parser and app releases for no benefit. Most `nomad-north-*` siblings are standalone — this package follows that convention. The `kherve` image installs `pynxtools[xps]` from PyPI like any other dependency.
 
 ## Why CasaXPS is a local build, not CI-built
 

@@ -129,9 +129,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# CasaXPS (demo or licensed) is a locally-supplied build input
-# for north_tools/casa/, never committed.
-src/nomad_north_xps/north_tools/casa/casa-app/*
-!src/nomad_north_xps/north_tools/casa/casa-app/.gitkeep
-src/nomad_north_xps/north_tools/casa/casa-wine/*
-!src/nomad_north_xps/north_tools/casa/casa-wine/.gitkeep
+# CasaXPS (demo or licensed) is a locally-supplied build input for casa/, never committed.
+# Deliberately NOT under src/ — a real Wine prefix's dosdevices/z: symlinks to `/` (host root),
+# and setuptools' package auto-discovery follows symlinks while walking src/. See casa/Dockerfile.
+local/casa-app/*
+!local/casa-app/.gitkeep
+local/casa-wine/*
+!local/casa-wine/.gitkeep
+
+# CasaXPS's own icon, extracted from the user-supplied CasaXPS.exe at build time
+# (casa/Dockerfile) — same redistribution-rights concern as casa-app/ above.
+src/nomad_north_xps/north_tools/casa/config/CasaXPS.png

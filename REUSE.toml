@@ -1,0 +1,38 @@
+version = 1
+
+[[annotations]]
+path = ["src/nomad_north_xps/**"]
+SPDX-FileCopyrightText = "The nomad-north-xps Authors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["tests/**"]
+SPDX-FileCopyrightText = "The nomad-north-xps Authors"
+SPDX-License-Identifier = "Apache-2.0"
+
+[[annotations]]
+path = ["docs/**"]
+SPDX-FileCopyrightText = "The nomad-north-xps Authors"
+SPDX-License-Identifier = "Apache-2.0"
+
+# Non-code project files (docs, CI, tooling config) that can't practically
+# carry an inline header.
+[[annotations]]
+path = [
+  ".cruft.json",
+  ".cspell/custom-dictionary.txt",
+  ".devcontainer/devcontainer.json",
+  ".dockerignore",
+  ".github/**",
+  ".gitignore",
+  ".pre-commit-config.yaml",
+  ".vscode/settings.json",
+  "CITATION.cff",
+  "MANIFEST.in",
+  "README.md",
+  "cspell.json",
+  "mkdocs.yml",
+  "pyproject.toml",
+]
+SPDX-FileCopyrightText = "The nomad-north-xps Authors"
+SPDX-License-Identifier = "Apache-2.0"
